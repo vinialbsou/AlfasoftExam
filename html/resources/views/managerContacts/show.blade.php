@@ -1,5 +1,5 @@
 
-@section('content')
+@yield('content')
     <h1>Manager Contact Details</h1>
 
     <p><strong>ID:</strong> {{ $contact->id }}</p>
@@ -18,4 +18,4 @@
 
     <br><br>
     <a href="{{ route('managerContacts.index') }}">Return</a>
-@endsection
+@endyield

@@ -22,26 +22,26 @@ Route::get('/', function () {
 # My Route for Manager Contact
 //Route::resource('managerContacts', ManagerContactController::class);
 // Listar todos os contatos
-Route::get('index', [ManagerContactController::class, 'index'])->name('managerContacts.index');
+Route::get('/index', [ManagerContactController::class, 'index'])->name('managerContacts.index');
 
 // Mostrar formulário para criar um contato
-Route::get('create', [ManagerContactController::class, 'create'])->name('managerContacts.create');
+Route::get('/create', [ManagerContactController::class, 'create'])->name('managerContacts.create');
 
 // Salvar novo contato
-Route::post('store', [ManagerContactController::class, 'store'])->name('managerContacts.store');
+Route::post('/store', [ManagerContactController::class, 'store'])->name('managerContacts.store');
 
 // Mostrar contato específico (mostra os detalhes)
-Route::get('managerContacts/{contact}', [ManagerContactController::class, 'show'])->name('managerContacts.show');
+Route::get('/managerContacts/{contact}', [ManagerContactController::class, 'show'])->name('managerContacts.show');
 
 // Mostrar formulário para editar contato
-Route::get('managerContacts/{contact}/edit', [ManagerContactController::class, 'edit'])->name('managerContacts.edit');
+Route::get('/managerContacts/{contact}/edit', [ManagerContactController::class, 'edit'])->name('managerContacts.edit');
 
 // Atualizar contato específico
-Route::put('managerContacts/{contact}', [ManagerContactController::class, 'update'])->name('managerContacts.update');
-Route::patch('managerContacts/{contact}', [ManagerContactController::class, 'update']);
+Route::put('/managerContacts/{contact}', [ManagerContactController::class, 'update'])->name('managerContacts.update');
+Route::patch('/managerContacts/{contact}', [ManagerContactController::class, 'update']);
 
 // Deletar contato específico
-Route::delete('managerContacts/{contact}', [ManagerContactController::class, 'destroy'])->name('managerContacts.destroy');
+Route::delete('/managerContacts/{contact}', [ManagerContactController::class, 'destroy'])->name('managerContacts.destroy');
 
 
 Route::get('/dashboard', function () {

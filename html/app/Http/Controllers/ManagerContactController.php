@@ -20,6 +20,7 @@ class ManagerContactController extends Controller
     public function index()
     {
         $contacts = ManagerContactModel::all();
+
         return view('managerContacts.index', compact('contacts'));
     }
 

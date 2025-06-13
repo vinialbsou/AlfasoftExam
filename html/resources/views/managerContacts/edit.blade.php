@@ -1,5 +1,5 @@
 
-@section('content')
+@yield('content')
     <h1>Edit Manager Contact</h1>
 
     @if ($errors->any())
@@ -28,4 +28,4 @@
         <button type="submit">Update</button>
         <a href="{{ route('managerContacts.index') }}">Cancel</a>
     </form>
-@endsection
+@endyield

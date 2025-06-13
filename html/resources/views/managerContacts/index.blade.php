@@ -1,4 +1,4 @@
-@section('content')
+@yield('content')
     <h1>Contact Management</h1>
 
     @if(session('success'))
@@ -43,4 +43,4 @@
             @endforelse
         </tbody>
     </table>
-@endsection
+@endyield
