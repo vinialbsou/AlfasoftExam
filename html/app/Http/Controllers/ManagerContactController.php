@@ -40,8 +40,8 @@ class ManagerContactController extends Controller
         $validation = [
             -100 => [
                 'name' => 'required|string|min:6',
-                'contact' => 'required|digits:9|unique:managerContacts,contact,',
-                'email' => 'required|email|unique:managerContacts,email,',
+                'contact' => 'required|digits:9|unique:manager_contacts,contact,',
+                'email' => 'required|email|unique:manager_contacts,email,',
             ]
         ];
 
@@ -82,8 +82,8 @@ class ManagerContactController extends Controller
         $validation = [
             -100 => [
                 'name' => 'required|string|min:6',
-                'contact' => 'required|digits:9|unique:managerContacts,contact,',
-                'email' => 'required|email|unique:managerContacts,email,',
+                'contact' => 'required|digits:9|unique:manager_contacts,contact,',
+                'email' => 'required|email',
             ]
         ];
 
