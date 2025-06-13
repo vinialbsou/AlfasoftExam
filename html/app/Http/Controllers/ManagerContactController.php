@@ -10,7 +10,7 @@ class ManagerContactController extends Controller
 {
     public function __construct()
     {
-         $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
 
@@ -50,7 +50,7 @@ class ManagerContactController extends Controller
 
         if ($validationErrors['errorCode'] < 0) {
 
-            throw new \Exception($validationErrors['statusText'], 400);
+            throw new \Exception(json_encode($validationErrors['statusText']), 400);
         }
 
         ManagerContactModel::create($request->all());
@@ -93,7 +93,7 @@ class ManagerContactController extends Controller
 
         if ($validationErrors['errorCode'] < 0) {
 
-            throw new \Exception($validationErrors['statusText'], 400);
+            throw new \Exception(json_encode($validationErrors['statusText']), 400);
         }
 
         $contact->update($request->all());
