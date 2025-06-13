@@ -49,7 +49,7 @@ class ManagerContactController extends Controller
         ManagerContactModel::create($request->all());
 
         return redirect()->route('contacts.index')
-            ->with('success', 'Contato criado com sucesso.');
+            ->with('success', 'Manager Contact created with success.');
     }
 
     /**
@@ -92,7 +92,7 @@ class ManagerContactController extends Controller
         $contact->update($request->all());
 
         return redirect()->route('contacts.index')
-            ->with('success', 'Contato atualizado com sucesso.');
+            ->with('success', 'Manager Contact updated with success..');
     }
 
     /**
@@ -104,7 +104,7 @@ class ManagerContactController extends Controller
         $contact->delete();
 
         return redirect()->route('contacts.index')
-            ->with('success', 'Contato excluído com sucesso.');
+            ->with('success', 'Manager Contact deleted with success.');
     }
 
 }
