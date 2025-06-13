@@ -27,4 +27,3 @@
         <button type="submit">Save</button>
         <a href="{{ route('managerContacts.index') }}">Cancel</a>
     </form>
-@endyield

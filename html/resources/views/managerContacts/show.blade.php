@@ -18,4 +18,3 @@
 
     <br><br>
     <a href="{{ route('managerContacts.index') }}">Return</a>
-@endyield

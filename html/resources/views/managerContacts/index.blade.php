@@ -43,4 +43,3 @@
             @endforelse
         </tbody>
     </table>
-@endyield
