@@ -1,26 +1,28 @@
-FROM php:8.1-fpm
+FROM php:8.2-cli
 
-# Instala extensões do PHP necessárias para o Laravel
+# Instalar dependências do sistema
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
+    libzip-dev \
     zip \
     unzip \
-    libzip-dev \
-    libpng-dev \
+    git \
+    curl \
     libonig-dev \
+    libpng-dev \
     libxml2-dev \
-    libssl-dev \
-    && docker-php-ext-install pdo_mysql zip
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath gd
 
-# Instala o Composer
+# Instalar Composer globalmente
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Ajusta permissões
-RUN chown -R www-data:www-data /var/www/html
-
-# Exponha a porta 80 para acessar via navegador
-EXPOSE 80
-
-# Define o diretório de trabalho
 WORKDIR /var/www/html
+
+# Copiar os arquivos da aplicação (opcional se usar volume)
+# COPY . /var/www/html
+
+# Permissão para storage e cache
+RUN [ -d /var/www/html/storage ] && chown -R www-data:www-data /var/www/html/storage || true \
+ && [ -d /var/www/html/bootstrap/cache ] && chown -R www-data:www-data /var/www/html/bootstrap/cache || true
+
+
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
