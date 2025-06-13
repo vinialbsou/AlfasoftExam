@@ -1,4 +1,3 @@
-@extends('layouts.app')
 
 @section('content')
     <h1>Edit Manager Contact</h1>
@@ -13,7 +12,7 @@
         </div>
     @endif
 
-    <form action="{{ route('contacts.update', $contact->id) }}" method="POST">
+    <form action="{{ route('managerContacts.update', $contact->id) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -27,6 +26,6 @@
         <input type="email" name="email" value="{{ old('email', $contact->email) }}" required><br><br>
 
         <button type="submit">Update</button>
-        <a href="{{ route('contacts.index') }}">Cancel</a>
+        <a href="{{ route('managerContacts.index') }}">Cancel</a>
     </form>
 @endsection
