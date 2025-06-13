@@ -30,7 +30,21 @@ class ManagerContactController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateContact($request);
+        $validation = [
+            -100 => [
+                'nome' => 'required|string|max:65536',
+                'email' => 'required|email',
+                'data_nascimento' => 'required|date',
+                'telefones' => 'required|numeric',
+            ]
+        ];
+
+        $validationErrors = (new RequestValidatorHelper())->run($request, $validation);
+
+        if ($validationErrors['errorCode'] < 0) {
+
+            throw new \Exception('Validation error', 400);
+        }
 
         ManagerContact::create($request->all());
 
