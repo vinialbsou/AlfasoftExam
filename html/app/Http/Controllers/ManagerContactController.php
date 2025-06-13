@@ -39,10 +39,9 @@ class ManagerContactController extends Controller
     {
         $validation = [
             -100 => [
-                'nome' => 'required|string|max:65536',
-                'email' => 'required|email',
-                'data_nascimento' => 'required|date',
-                'telefones' => 'required|numeric',
+                'name' => 'required|string|min:6',
+                'contact' => 'required|digits:9|unique:managerContacts,contact,',
+                'email' => 'required|email|unique:managerContacts,email,',
             ]
         ];
 
@@ -82,10 +81,9 @@ class ManagerContactController extends Controller
     {
         $validation = [
             -100 => [
-                'nome' => 'required|string|max:65536',
-                'email' => 'required|email',
-                'data_nascimento' => 'required|date',
-                'telefones' => 'required|numeric',
+                'name' => 'required|string|min:6',
+                'contact' => 'required|digits:9|unique:managerContacts,contact,',
+                'email' => 'required|email|unique:managerContacts,email,',
             ]
         ];
 
