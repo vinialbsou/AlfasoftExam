@@ -8,13 +8,19 @@ use App\Models\ManagerContactModel;
 
 class ManagerContactController extends Controller
 {
+    public function __construct()
+    {
+         $this->middleware('auth')->except(['index', 'show']);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $contacts = ManagerContactModel::all();
-        return view('contacts.index', compact('contacts'));
+        return view('managerContacts.index', compact('contacts'));
     }
 
     /**
@@ -22,7 +28,7 @@ class ManagerContactController extends Controller
      */
     public function create()
     {
-        return view('contacts.create');
+        return view('managerContacts.create');
     }
 
     /**
@@ -48,7 +54,7 @@ class ManagerContactController extends Controller
 
         ManagerContactModel::create($request->all());
 
-        return redirect()->route('contacts.index')
+        return redirect()->route('managerContacts.index')
             ->with('success', 'Manager Contact created with success.');
     }
 
@@ -57,7 +63,7 @@ class ManagerContactController extends Controller
      */
     public function show(ManagerContactModel $contact)
     {
-        return view('contacts.show', compact('contact'));
+        return view('managerContacts.show', compact('contact'));
     }
 
     /**
@@ -65,7 +71,7 @@ class ManagerContactController extends Controller
      */
     public function edit(ManagerContactModel $contact)
     {
-        return view('contacts.edit', compact('contact'));
+        return view('managerContacts.edit', compact('contact'));
     }
 
     /**
@@ -91,7 +97,7 @@ class ManagerContactController extends Controller
 
         $contact->update($request->all());
 
-        return redirect()->route('contacts.index')
+        return redirect()->route('managerContacts.index')
             ->with('success', 'Manager Contact updated with success..');
     }
 
@@ -103,7 +109,7 @@ class ManagerContactController extends Controller
     {
         $contact->delete();
 
-        return redirect()->route('contacts.index')
+        return redirect()->route('managerContacts.index')
             ->with('success', 'Manager Contact deleted with success.');
     }
 
