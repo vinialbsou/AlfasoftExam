@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\helper\RequestValidatorHelper;
-use App\Models\ManagerContact;
+use App\Models\ManagerContactModel;
 
 class ManagerContactController extends Controller
 {
@@ -13,7 +13,7 @@ class ManagerContactController extends Controller
      */
     public function index()
     {
-        $contacts = ManagerContact::all();
+        $contacts = ManagerContactModel::all();
         return view('contacts.index', compact('contacts'));
     }
 
@@ -46,7 +46,7 @@ class ManagerContactController extends Controller
             throw new \Exception('Validation error', 400);
         }
 
-        ManagerContact::create($request->all());
+        ManagerContactModel::create($request->all());
 
         return redirect()->route('contacts.index')
             ->with('success', 'Contato criado com sucesso.');
@@ -55,7 +55,7 @@ class ManagerContactController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ManagerContact $contact)
+    public function show(ManagerContactModel $contact)
     {
         return view('contacts.show', compact('contact'));
     }
@@ -63,7 +63,7 @@ class ManagerContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ManagerContact $contact)
+    public function edit(ManagerContactModel $contact)
     {
         return view('contacts.edit', compact('contact'));
     }
@@ -71,7 +71,7 @@ class ManagerContactController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ManagerContact $contact)
+    public function update(Request $request, ManagerContactModel $contact)
     {
         $validation = [
             -100 => [
@@ -99,7 +99,7 @@ class ManagerContactController extends Controller
      * Remove the specified resource from storage.
      * Used for softDelete
      */
-    public function destroy(ManagerContact $contact)
+    public function destroy(ManagerContactModel $contact)
     {
         $contact->delete();
 
