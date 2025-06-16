@@ -5,14 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\helper\RequestValidatorHelper;
 use App\Models\ManagerContactModel;
+use Illuminate\Support\Facades\Validator;
 
 class ManagerContactController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth')->except(['index', 'show']);
-    }
-
 
     /**
      * Display a listing of the resource.
@@ -37,19 +33,16 @@ class ManagerContactController extends Controller
      */
     public function store(Request $request)
     {
-        $validation = [
-            -100 => [
-                'name' => 'required|string|min:6',
-                'contact' => 'required|digits:9|unique:manager_contacts,contact,',
-                'email' => 'required|email|unique:manager_contacts,email,',
-            ]
-        ];
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:6',
+            'contact' => 'required|digits:9|unique:manager_contacts,contact' ,
+            'email' => 'required|email|unique:manager_contacts,email',
+        ]);
 
-        $validationErrors = (new RequestValidatorHelper())->run($request, $validation);
-
-        if ($validationErrors['errorCode'] < 0) {
-
-            throw new \Exception(json_encode($validationErrors['statusText']), 400);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         ManagerContactModel::create($request->all());
@@ -79,19 +72,19 @@ class ManagerContactController extends Controller
      */
     public function update(Request $request, ManagerContactModel $contact)
     {
-        $validation = [
-            -100 => [
-                'name' => 'required|string|min:6',
-                'contact' => 'required|digits:9|unique:manager_contacts,contact,',
-                'email' => 'required|email',
-            ]
-        ];
+        ManagerContactModel::findOrFail($contact->id);
 
-        $validationErrors = (new RequestValidatorHelper())->run($request, $validation);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:6',
+            'contact' => 'required|digits:9|unique:manager_contacts,contact,' . $contact->id,
+            'email' => 'required|email|unique:manager_contacts,email,' . $contact->id,
+        ]);
 
-        if ($validationErrors['errorCode'] < 0) {
 
-            throw new \Exception(json_encode($validationErrors['statusText']), 400);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $contact->update($request->all());
